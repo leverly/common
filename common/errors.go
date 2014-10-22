@@ -13,6 +13,7 @@ var (
 	ErrNullValue     = errors.New("value is NULL")
 	ErrNotAllowed    = errors.New("operation not allow")
 	ErrInvalidData   = errors.New("invalid data info")
+	ErrNoPrivelige   = errors.New("no privelige")
 
 	// server inner related error message
 	ErrEntryExist    = errors.New("entry already exist")
@@ -39,5 +40,7 @@ var (
 	ErrMasterNotExist = errors.New("master device not exist")
 	ErrSlaveNotExist  = errors.New("slave device not exist")
 	ErrInvalidDevice  = errors.New("device info invalid")
-	
+
+	// project related error message
+	ErrProjectNotExist	= errors.New("project not exist")
 )
