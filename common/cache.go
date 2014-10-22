@@ -10,6 +10,7 @@ type Cache interface {
 	Set(key interface{}, value interface{})
 	Delete(key interface{})
 	Clear()
+	Len() int64
 }
 
 type LRUCacheItem struct {
