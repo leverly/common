@@ -43,4 +43,5 @@ var (
 
 	// project related error message
 	ErrProjectNotExist	= errors.New("project not exist")
+	ErrEntryNotDir		= errors.New("entry is not a directory")
 )

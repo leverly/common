@@ -37,8 +37,14 @@ func (this *Set) Remove(elem interface{}) bool {
 	return find
 }
 
-func (this *Set) Len() int {
-	return len(this.data)
+func (this *Set) Clear() {
+	if this.Len() > 0 {
+		this.data = make(map[interface{}]struct{})
+	}
+}
+
+func (this *Set) Len() int64 {
+	return int64(len(this.data))
 }
 
 func (this *Set) String() string {

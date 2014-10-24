@@ -31,7 +31,7 @@ func (this *SafeSet) Contain(elem interface{}) bool {
 	return this.container.Contain(elem)
 }
 
-func (this *SafeSet) Len() int {
+func (this *SafeSet) Len() int64 {
 	this.lock.RLock()
 	defer this.lock.RUnlock()
 	return this.container.Len()

@@ -265,3 +265,32 @@ func TestSetDifference(t *testing.T) {
 		}
 	}
 }
+
+func TestClear(t *testing.T) {
+	s := NewSet()
+	s.Clear()
+	if s.Len() != 0 {
+		t.Error("check len failed")
+	}
+	for i := 0; i < 100; i++ {
+		succ := s.Add(i)
+		if !succ {
+			t.Error("find the elem:", i)
+		} else if s.Len() != int64(i+1) {
+			t.Error("set len failed", s.Len())
+		}
+	}
+	s.Clear()
+	if s.Len() != 0 {
+		t.Error("check len failed")
+	}
+	// add again
+	for i := 0; i < 100; i++ {
+		succ := s.Add(i)
+		if !succ {
+			t.Error("find the elem:", i)
+		} else if s.Len() != int64(i+1) {
+			t.Error("set len failed", s.Len())
+		}
+	}
+}
