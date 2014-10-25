@@ -31,6 +31,7 @@ var (
 	ErrPasswordWrong   = errors.New("account password wrong")
 	ErrInvalidName     = errors.New("login name invalid")
 	ErrInvalidSign     = errors.New("check signature invalid")
+	ErrSignTimeout     = errors.New("check signature timeout")
 
 	// dev related error message
 	ErrDeviceIsSlave  = errors.New("device is slave")
@@ -42,6 +43,6 @@ var (
 	ErrInvalidDevice  = errors.New("device info invalid")
 
 	// project related error message
-	ErrProjectNotExist	= errors.New("project not exist")
-	ErrEntryNotDir		= errors.New("entry is not a directory")
+	ErrProjectNotExist = errors.New("project not exist")
+	ErrEntryNotDir     = errors.New("entry is not a directory")
 )

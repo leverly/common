@@ -26,6 +26,8 @@ type LRUCache struct {
 	index    map[interface{}](*LRUCacheItem)
 	lru      *list.List
 	maxCount int64
+	hit      int64
+	miss     int64
 }
 
 func NewLRUCache(count int64) *LRUCache {
@@ -36,12 +38,21 @@ func (this *LRUCache) Len() int64 {
 	return int64(len(this.index))
 }
 
+func (this *LRUCache) HitRatio() float32 {
+	if this.hit+this.miss > 0 {
+		return float32(this.hit) / float32(this.hit+this.miss)
+	}
+	return 0.0
+}
+
 func (this *LRUCache) Get(key interface{}) (interface{}, bool) {
 	item, find := this.index[key]
 	if find {
+		this.hit++
 		this.lru.MoveToFront(item.element)
 		return item.value, true
 	}
+	this.miss++
 	return nil, find
 }
 

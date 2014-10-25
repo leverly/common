@@ -14,24 +14,14 @@ func NewSafeMap() *SafeMap {
 	return &SafeMap{container: conn}
 }
 
+// all kv pair count
 func (this *SafeMap) Len() int {
 	this.lock.RLock()
 	defer this.lock.RUnlock()
 	return len(this.container)
 }
 
-// key must not exist
-func (this *SafeMap) Insert(key interface{}, value interface{}) (err error) {
-	this.lock.Lock()
-	defer this.lock.Unlock()
-	_, find := this.container[key]
-	if find {
-		return ErrEntryExist
-	}
-	this.container[key] = value
-	return err
-}
-
+// if key exist update, else insert
 func (this *SafeMap) Replace(key interface{}, value interface{}) (interface{}, bool) {
 	this.lock.Lock()
 	defer this.lock.Unlock()
@@ -40,7 +30,20 @@ func (this *SafeMap) Replace(key interface{}, value interface{}) (interface{}, b
 	return temp, find
 }
 
-func (this *SafeMap) Update(key interface{}, value interface{}) (err error) {
+// if key exist return err, else return nil
+func (this *SafeMap) Insert(key interface{}, value interface{}) error {
+	this.lock.Lock()
+	defer this.lock.Unlock()
+	_, find := this.container[key]
+	if find {
+		return ErrEntryExist
+	}
+	this.container[key] = value
+	return nil
+}
+
+// if key exist return nil, else return err
+func (this *SafeMap) Update(key interface{}, value interface{}) error {
 	this.lock.Lock()
 	defer this.lock.Unlock()
 	_, find := this.container[key]
@@ -48,9 +51,10 @@ func (this *SafeMap) Update(key interface{}, value interface{}) (err error) {
 		return ErrEntryNotExist
 	}
 	this.container[key] = value
-	return err
+	return nil
 }
 
+// if key exist return value + true, else return nil + false
 func (this *SafeMap) Delete(key interface{}) (interface{}, bool) {
 	this.lock.Lock()
 	defer this.lock.Unlock()
@@ -59,6 +63,7 @@ func (this *SafeMap) Delete(key interface{}) (interface{}, bool) {
 	return value, find
 }
 
+// if key exist return value + true, else return nil + false
 func (this *SafeMap) Find(key interface{}) (interface{}, bool) {
 	this.lock.RLock()
 	defer this.lock.RUnlock()
