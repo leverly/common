@@ -87,7 +87,7 @@ func TestCacheAll(t *testing.T) {
 }
 
 func TestWashout(t *testing.T) {
-	var maxCount int64 = 1000 
+	var maxCount int64 = 1000
 	cache := NewLRUCache(maxCount)
 	// init fill items
 	for i := 0; i < int(maxCount); i++ {
@@ -97,7 +97,7 @@ func TestWashout(t *testing.T) {
 		}
 	}
 
-	rand.Seed(time.Now().UnixNano())
+	rand.Seed(time.Now().UTC().UnixNano())
 	keys := make([]int, 0)
 	// get random then put more items
 	for i := 0; i < 10*int(maxCount); i++ {

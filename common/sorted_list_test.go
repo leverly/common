@@ -28,7 +28,7 @@ func checkListSorted(list *SortedList) bool {
 func TestSortedListInsert(t *testing.T) {
 	list := NewSortedList(compareInt)
 	set := NewSet()
-	rand.Seed(time.Now().UnixNano())
+	rand.Seed(time.Now().UTC().UnixNano())
 	for i := 0; i < maxCount; i++ {
 		item := rand.Intn(maxCount)
 		list.Insert(item)
@@ -66,7 +66,7 @@ func TestSortedListInsert(t *testing.T) {
 func TestSortedListDeleteOne(t *testing.T) {
 	list := NewSortedList(compareInt)
 	keys := make([]int, 0)
-	rand.Seed(time.Now().UnixNano())
+	rand.Seed(time.Now().UTC().UnixNano())
 	for i := 0; i < maxCount; i++ {
 		item := rand.Intn(maxCount)
 		keys = append(keys, item)

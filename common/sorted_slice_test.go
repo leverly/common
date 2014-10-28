@@ -39,7 +39,7 @@ func TestSortedSliceInsert(t *testing.T) {
 	array := NewSortedSlice(int64(maxCount/5), compareInt)
 	list := NewSortedList(compareInt)
 	set := NewSet()
-	rand.Seed(time.Now().UnixNano())
+	rand.Seed(time.Now().UTC().UnixNano())
 	var count int
 	for count < maxCount {
 		for i := 0; i < maxCount; i++ {
@@ -72,7 +72,7 @@ func TestSortedSliceSearch(t *testing.T) {
 	array := NewSortedSlice(0, compareInt)
 	list := NewSortedList(compareInt)
 	set := NewSet()
-	rand.Seed(time.Now().UnixNano())
+	rand.Seed(time.Now().UTC().UnixNano())
 	var count int
 	for count < maxCount {
 		curCount := rand.Intn(maxCount)
@@ -124,7 +124,7 @@ func TestSortedSliceRemove(t *testing.T) {
 	array := NewSortedSlice(int64(maxCount/5), compareInt)
 	list := NewSortedList(compareInt)
 	set := NewSet()
-	rand.Seed(time.Now().UnixNano())
+	rand.Seed(time.Now().UTC().UnixNano())
 	var count int
 	for count < maxCount {
 		curCount := rand.Intn(maxCount)

@@ -34,6 +34,7 @@ func NewLRUCache(count int64) *LRUCache {
 	return &LRUCache{index: make(map[interface{}](*LRUCacheItem)), lru: list.New(), maxCount: count}
 }
 
+// get the current items count
 func (this *LRUCache) Len() int64 {
 	return int64(len(this.index))
 }
@@ -45,6 +46,14 @@ func (this *LRUCache) HitRatio() float32 {
 	return 0.0
 }
 
+// only support enlarge the max count rightnow
+func (this *LRUCache) SetMaxCount(count int64) {
+	if this.maxCount < count {
+		this.maxCount = count
+	}
+}
+
+// if exist return value + true, else return nil + false
 func (this *LRUCache) Get(key interface{}) (interface{}, bool) {
 	item, find := this.index[key]
 	if find {
@@ -53,7 +62,7 @@ func (this *LRUCache) Get(key interface{}) (interface{}, bool) {
 		return item.value, true
 	}
 	this.miss++
-	return nil, find
+	return nil, false
 }
 
 func (this *LRUCache) Set(key interface{}, value interface{}) {
@@ -63,6 +72,7 @@ func (this *LRUCache) Set(key interface{}, value interface{}) {
 		this.lru.MoveToFront(item.element)
 		return
 	} else if this.Len() >= this.maxCount {
+		// TODO remove more than one items
 		delete(this.index, this.lru.Remove(this.lru.Back()))
 	}
 	this.index[key] = NewLRUCacheItem(value, this.lru.PushFront(key))
@@ -77,12 +87,14 @@ func (this *LRUCache) Delete(key interface{}) {
 }
 
 func (this *LRUCache) Clear() {
-	this.index = make(map[interface{}](*LRUCacheItem))
-	this.lru = list.New()
+	if this.Len() > 0 {
+		this.index = make(map[interface{}](*LRUCacheItem))
+		this.lru = list.New()
+	}
 }
 
 func (this *LRUCache) Debug() {
-	fmt.Printf("cache length:<%d %d>, cache list:", this.lru.Len(), len(this.index))
+	fmt.Printf("cache length:<%d %d>, items:", this.lru.Len(), len(this.index))
 	element := this.lru.Front()
 	for element != nil {
 		value, find := this.index[element.Value]

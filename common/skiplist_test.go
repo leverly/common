@@ -27,7 +27,7 @@ func checkSkipListSorted(list *SkipList) bool {
 func TestSkipListSetGet(t *testing.T) {
 	list := NewSkipList(compareInt)
 	set := NewSet()
-	rand.Seed(time.Now().UnixNano())
+	rand.Seed(time.Now().UTC().UnixNano())
 	var count int
 	for count < maxCount {
 		curCount := rand.Intn(maxCount)
@@ -77,7 +77,7 @@ func TestSkipListSetGet(t *testing.T) {
 func TestSkipListDelete(t *testing.T) {
 	list := NewSkipList(compareInt)
 	set := NewSet()
-	rand.Seed(time.Now().UnixNano())
+	rand.Seed(time.Now().UTC().UnixNano())
 	var maxCount int = 2000
 	var count int
 	for count < maxCount {

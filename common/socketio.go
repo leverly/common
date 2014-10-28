@@ -12,7 +12,7 @@ import (
 func MyRead(conn net.Conn, packLen int64, Buffer []byte, timeout int64) (err error) {
 	CheckParam(packLen <= int64(cap(Buffer)) && timeout > 0)
 	var receiveLen int64
-	// conn.SetReadDeadline(time.Now().Add(time.Duration(timeout)))
+	// conn.SetReadDeadline(time.Now().UTC().Add(time.Duration(timeout)))
 	for receiveLen < packLen {
 		tempLen, err := conn.Read(Buffer[receiveLen:packLen])
 		if err == io.EOF {
@@ -31,7 +31,7 @@ func MyRead(conn net.Conn, packLen int64, Buffer []byte, timeout int64) (err err
 
 func MyWrite(conn net.Conn, packLen int64, Buffer []byte, timeout int64) (err error) {
 	CheckParam(packLen <= int64(len(Buffer)) && timeout > 0)
-	//conn.SetWriteDeadline(time.Now().Add(time.Duration(timeout)))
+	//conn.SetWriteDeadline(time.Now().UTC().Add(time.Duration(timeout)))
 	_, err = conn.Write(Buffer[:packLen])
 	if err != nil {
 		fmt.Println("write socket connection error:", conn.RemoteAddr(), err)

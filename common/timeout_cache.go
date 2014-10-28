@@ -10,11 +10,11 @@ type TimeoutValue struct {
 }
 
 func NewTimeoutValue(value interface{}) *TimeoutValue {
-	return &TimeoutValue{value: value, timestamp: time.Now().UnixNano()}
+	return &TimeoutValue{value: value, timestamp: time.Now().UTC().UnixNano()}
 }
 
 func (this *TimeoutValue) Expired(timeout int64) bool {
-	return this.timestamp+timeout < time.Now().UnixNano()
+	return this.timestamp+timeout < time.Now().UTC().UnixNano()
 }
 
 // Lazy washout the timeout entries
