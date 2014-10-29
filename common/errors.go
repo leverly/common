@@ -43,6 +43,8 @@ var (
 	ErrMasterNotExist = errors.New("master device not exist")
 	ErrSlaveNotExist  = errors.New("slave device not exist")
 	ErrInvalidDevice  = errors.New("device info invalid")
+	ErrDeviceOffline  = errors.New("device is offline")
+	ErrDeviceOnline   = errors.New("device is online")
 
 	// project related error message
 	ErrProjectNotExist = errors.New("project not exist")
