@@ -6,14 +6,15 @@ import (
 
 var (
 	// common error message
-	ErrUnknown       = errors.New("unknown error")
-	ErrInvalidParam  = errors.New("invalid input param")
-	ErrTimeout       = errors.New("request timeout")
-	ErrInvalidStatus = errors.New("status exception")
-	ErrNullValue     = errors.New("value is NULL")
-	ErrNotAllowed    = errors.New("operation not allow")
-	ErrInvalidData   = errors.New("invalid data info")
-	ErrNoPrivelige   = errors.New("no privelige")
+	ErrUnknown        = errors.New("unknown error")
+	ErrInvalidParam   = errors.New("invalid input param")
+	ErrTimeout        = errors.New("request timeout")
+	ErrInvalidStatus  = errors.New("status exception")
+	ErrNullValue      = errors.New("value is NULL")
+	ErrNotAllowed     = errors.New("operation not allow")
+	ErrInvalidData    = errors.New("invalid data info")
+	ErrNoPrivelige    = errors.New("no privelige")
+	ErrInvalidRequest = errors.New("invalid request param")
 
 	// server inner related error message
 	ErrEntryExist    = errors.New("entry already exist")
@@ -44,22 +45,31 @@ var (
 	ErrInvalidDevice  = errors.New("device info invalid")
 
 	// project related error message
-	ErrProjectNotExist	= errors.New("project not exist")
-	ErrEntryNotDir		= errors.New("entry is not a directory")
+	ErrProjectNotExist = errors.New("project not exist")
+	ErrEntryNotDir     = errors.New("entry is not a directory")
 
 	// domain related error message
-	ErrMajorDomainExist		= errors.New("major domain already exist")
-	ErrMajorDomainNotExist	= errors.New("major domain not exist")
-	ErrInvalidDomain		= errors.New("domain format invalid")
+	ErrMajorDomainExist    = errors.New("major domain already exist")
+	ErrMajorDomainNotExist = errors.New("major domain not exist")
+	ErrInvalidDomain       = errors.New("domain format invalid")
 
 	// service related error message
-	ErrServiceNotExist		= errors.New("service not exist")
+	ErrServiceNotExist = errors.New("service not exist")
 
 	// key related error message
-	ErrTooManyKeyPair	= errors.New("too many key pairs")
+	ErrTooManyKeyPair = errors.New("too many key pairs")
 
 	// version related error message
-	ErrVersionNotExist			= errors.New("version not exist")
-	ErrVersionRollback			= errors.New("version rollback")
-	ERRTooManyVersionPublished	= errors.New("too many version published")
+	ErrVersionNotExist         = errors.New("version not exist")
+	ErrVersionRollback         = errors.New("version rollback")
+	ERRTooManyVersionPublished = errors.New("too many version published")
+
+	ErrInvalidRollback         = errors.New("invalid rollback")
+	ErrTooManyVersionPublished = errors.New("too many version published")
+	ErrVersionCompatible       = errors.New("version compatible")
+	ErrVersionNotCompatible    = errors.New("version not compatible")
+
+	// blobstore related error message
+	ErrFileNotExist = errors.New("file not exist")
+	ErrFileExist    = errors.New("file already exist")
 )
